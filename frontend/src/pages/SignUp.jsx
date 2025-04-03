@@ -62,7 +62,7 @@ const SignUp = () => {
             variants={containerVariants}
         >
             {Loaded ? (
-                <div className='flex justify-center items-center text-center ml-24 h-96'>
+                <div className='flex justify-center items-center text-center mx-auto h-96'>
                     <Preloader />
                 </div>
             ) : (

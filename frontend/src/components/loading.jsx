@@ -10,7 +10,7 @@ const loading = () => {
                 <LoaderPinwheel
                 visible={true}
                 width="300"
-                className='animate-spin'
+                className='animate-spin w-20 h-20'
                 color="#4fa94d"
                 ariaLabel="infinity-spin-loading"
                 />

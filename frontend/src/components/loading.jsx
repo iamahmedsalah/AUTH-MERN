@@ -1,15 +1,16 @@
 
 import React from 'react';
-import { InfinitySpin } from "react-loader-spinner";
+import { LoaderPinwheel } from "lucide-react";
 
 const loading = () => {
 
         
         return (
                 
-                <InfinitySpin
+                <LoaderPinwheel
                 visible={true}
                 width="300"
+                className='animate-spin'
                 color="#4fa94d"
                 ariaLabel="infinity-spin-loading"
                 />

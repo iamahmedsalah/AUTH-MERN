@@ -8,8 +8,8 @@ A full-stack authentication app built with the MERN stack (MongoDB, Express.js, 
 
 ## UI/UX
 ![Login](<Screenshot 2025-04-04 094659.png>)!
-[Forget Password](<Screenshot 2025-04-04 094715.png>)!
-[Sign Up](<Screenshot 2025-04-04 094745.png>)
+![Forget Password](<Screenshot 2025-04-04 094715.png>)!
+![Sign Up](<Screenshot 2025-04-04 094745.png>)!
 
 ## Deployment
 - Push to GitHub and deploy on Vercel.

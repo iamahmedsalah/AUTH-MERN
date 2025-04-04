@@ -68,8 +68,8 @@ const EmailVerification = () => {
 
         try{
             await verifyEmail(verificationCode);
-            navigate('/');
             toast.success('Email verified successfully!')
+            navigate('/login');
         }
         catch(error){
             console.log('Verification Error:', error);

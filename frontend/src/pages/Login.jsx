@@ -19,10 +19,14 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!email || !password) {
-            toast.error('Please fill all fields');
-            return;
-        }
+        // if (error) {
+        //     toast.error(error);
+        //     console.log(error);
+        // } 
+        // if (!email || !password) {
+        //     toast.error('Please fill all fields');
+        //     return;
+        // }
         await login(email, password);
         toast.success('Login Successfull');
         

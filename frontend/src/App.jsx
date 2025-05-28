@@ -22,14 +22,14 @@ const ProtectedRoute = ({ children }) => {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate('/login');
-    } else if (!user?.isVerified) {
-      navigate('/verify-email');
+      navigate('/login', { replace: true }); // Add replace: true
+    } else if (user && !user?.isVerified) {
+      navigate('/verify-email', { replace: true });
     }
   }, [isAuthenticated, user, navigate]);
 
-  if (!isAuthenticated || !user?.isVerified) {
-    return null; // Optionally, show a loading spinner or placeholder
+  if (!isAuthenticated || (user && !user?.isVerified)) {
+    return null;
   }
 
   return children;

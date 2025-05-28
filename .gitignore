@@ -1,3 +1,7 @@
+# Environment variables
+config.env
+.env
+
 # Logs
 logs
 *.log
@@ -12,7 +16,7 @@ dist
 dist-ssr
 *.local
 
-config.env
+
 
 # Editor directories and files
 .vscode/*

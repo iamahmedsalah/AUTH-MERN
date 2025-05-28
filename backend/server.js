@@ -33,7 +33,7 @@ app.use(cookieParser());
 
 // Log requests to the console
 const devMode = process.env.NODE_ENV;
-devMode === "development"? app.use(morgan("dev")): console.log(`Mode: Orhter envirmont`);
+devMode === "development"? app.use(morgan("dev")): console.log(`Mode:In Production `);
 
 
 // Routes

@@ -11,6 +11,18 @@ export const containerVariants = {
     },
 };
 
+// Container variant with slower stagger for SignUp page
+export const containerVariantsSlow = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            staggerChildren: 0.5,
+        },
+    },
+};
+
 export const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },

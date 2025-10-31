@@ -71,7 +71,8 @@ const sendResetSuccessEmail = async (email, name) => {
         { name },
         "Password Reset Success Email"
     );
-}
+};
+
 module.exports = {
     sendVerficationEmail, 
     sendWelcomeEmail,

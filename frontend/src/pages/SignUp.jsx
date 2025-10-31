@@ -7,7 +7,7 @@ import PasswordMeter from '../components/PasswordMeter';
 import Preloader from '../components/loading';
 import AuthContainer from '../components/AuthContainer';
 import AuthButton from '../components/AuthButton';
-import { containerVariants, itemVariants } from '../utils/animationVariants';
+import { containerVariantsSlow, itemVariants } from '../utils/animationVariants';
 import {useNavigate} from 'react-router';
 import {useAuthStore} from '../../store/authStore';
 import toast from 'react-hot-toast'
@@ -57,7 +57,7 @@ const SignUp = () => {
                     <Preloader />
                 </div>
             ) : (
-                <motion.div variants={containerVariants}>
+                <motion.div variants={containerVariantsSlow}>
                     <motion.div className='p-8' variants={itemVariants}>
                         <h2 className='text-3xl mb-7 font-bold text-center bg-gradient-to-r from-green-400 to-emerald-500 text-transparent bg-clip-text'>
                             Create Account

@@ -6,91 +6,71 @@ const {
     PASSWORD_RESET_SUCCESS_TEMPLATE,
     }= require('./emailTemplate');
 
-
-const dotenv = require("dotenv");
-dotenv.config({ path: "config.env" });
-
-
-// Send verification email
-const sendVerficationEmail = async (email, verificationToken, name ) => {
-
+// Generic email sending function to eliminate duplication
+const sendEmail = async (to, subject, htmlTemplate, replacements, category) => {
     try {
+        let html = htmlTemplate;
+        // Replace all placeholders in the template
+        for (const [key, value] of Object.entries(replacements)) {
+            html = html.replace(new RegExp(`{${key}}`, 'g'), value);
+        }
+
         const res = await transporter.sendMail({
             from: sender,
-            to: email,
-            subject: "Verify your email",
-            html:VERIFICATION_EMAIL_TEMPLATE.replace('{verificationCode}', verificationToken).replace('{name}', name).replace('{email}', email),
-            category: "Verification Email"
-        })
-        console.log('Email sent successfully' , res);
-
+            to,
+            subject,
+            html,
+            category
+        });
+        console.log(`${category} sent successfully`, res);
     } catch (error) {
-        console.log('Error sending email' , error);
+        console.log(`Error sending ${category}`, error);
         throw new Error(`Error sending email: ${error.message}`);
     }
+};
+
+// Send verification email
+const sendVerficationEmail = async (email, verificationToken, name) => {
+    await sendEmail(
+        email,
+        "Verify your email",
+        VERIFICATION_EMAIL_TEMPLATE,
+        { verificationCode: verificationToken, name, email },
+        "Verification Email"
+    );
 };
 
 // Send welcome email
 const sendWelcomeEmail = async (email, name) => {
-
-    try{
-        const res = await transporter.sendMail({
-            from: sender,
-            to: email,
-            subject: "Welcome to our platform",
-            html: WELCOME_EMAIL_TEMPLATE.replace('{name}', name).replace('{email}', email),
-            category: "Welcome Email"
-        });
-        console.log('Welcome email sent successfully' , res);
-
-    }catch{
-        console.log('Error sending welcome email' , error);
-        throw new Error(`Error sending email: ${error.message}`);
-
-    }
-
+    await sendEmail(
+        email,
+        "Welcome to our platform",
+        WELCOME_EMAIL_TEMPLATE,
+        { name, email },
+        "Welcome Email"
+    );
 };
 
 // Send reset password email
-const sendPasswordResetEmail = async (email, resetURL , name) => {
-
-    try{
-        const res = await transporter.sendMail({
-            from: sender,
-            to: email,
-            subject: "Reset your password",
-            html: PASSWORD_RESET_REQUEST_TEMPLATE.replace('{resetURL}', resetURL).replace('{name}', name).replace('{email}', email),
-            category: "Password Reset Email"
-        });
-        console.log('Password reset email sent successfully' , res);
-
-    }catch{
-        console.log('Error sending password reset email' , error);
-        throw new Error(`Error sending email: ${error.message}`);
-
-    }
-
+const sendPasswordResetEmail = async (email, resetURL, name) => {
+    await sendEmail(
+        email,
+        "Reset your password",
+        PASSWORD_RESET_REQUEST_TEMPLATE,
+        { resetURL, name, email },
+        "Password Reset Email"
+    );
 };
 
 // Send reset password success email
-const sendResetSuccessEmail = async (email,name) => {
-
-    try{
-        const res = await transporter.sendMail({
-            from: sender,
-            to: email,
-            subject: "Password reset successful",
-            html: PASSWORD_RESET_SUCCESS_TEMPLATE.replace('{name}', name),
-            category: "Password Reset Success Email"
-        });
-        console.log('Password reset success email sent successfully' , res);
-
-    }catch{
-        console.log('Error sending password reset success email' , error);
-        throw new Error(`Error sending email: ${error.message}`);
-
-    }
-
+const sendResetSuccessEmail = async (email, name) => {
+    await sendEmail(
+        email,
+        "Password reset successful",
+        PASSWORD_RESET_SUCCESS_TEMPLATE,
+        { name },
+        "Password Reset Success Email"
+    );
 }
 module.exports = {
     sendVerficationEmail, 

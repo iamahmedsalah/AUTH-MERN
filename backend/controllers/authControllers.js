@@ -2,8 +2,6 @@ const User = require("../models/userModel");
 
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
-const dotenv = require("dotenv");
-dotenv.config({ path: "config.env" });
 
 const { generateTokenSetCookie } = require("../utils/generateTokenSetCookie");
 

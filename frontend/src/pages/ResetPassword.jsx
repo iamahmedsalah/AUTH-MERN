@@ -3,26 +3,13 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useAuthStore } from '../../store/authStore';
 import Input from '../components/inputs';
+import AuthContainer from '../components/AuthContainer';
+import AuthButton from '../components/AuthButton';
+import { itemVariants } from '../utils/animationVariants';
 import toast from 'react-hot-toast';
-import { Lock, ArrowLeft, Loader } from 'lucide-react';
+import { Lock, ArrowLeft } from 'lucide-react';
 import { Link, useParams, useNavigate } from 'react-router';
 import PasswordMeter from '../components/PasswordMeter';
-const containerVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        transition: {
-            staggerChildren: 0.3,
-        },
-    },
-};
-
-const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-};
-
 
 const ResetPassword = () => {
 
@@ -58,11 +45,14 @@ const ResetPassword = () => {
         }, 2000);
     }
     return (
-        <motion.div
-            className='max-w-sm w-full bg-gray-800/25 backdrop-filter backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden max-sm:w-fit '
-            initial="hidden"
-            animate="visible"
-            variants={containerVariants}>
+        <AuthContainer
+            footer={
+                <Link to="/login" className="text-green-500 hover:underline">
+                    <ArrowLeft className='w-5 h-5 inline-block mr-1' />
+                    Back to Login
+                </Link>
+            }
+        >
             <motion.div className='p-8' >
                 <motion.h2 variants={itemVariants}
                     className='text-3xl mb-7  font-bold text-center bg-gradient-to-r from-green-400 to-emerald-500 text-transparent bg-clip-text'>
@@ -92,27 +82,16 @@ const ResetPassword = () => {
                             />
                         </motion.div>
                         <PasswordMeter password={password} />
-                        <motion.button
-                            type='submit'
-                            className='mt-5 w-full py-3 px-4 bg-gradient-to-r from-green-500 to-emerald-700 rounded-lg text-white font-semibold shadow-lg hover:from-green-600 hover:to-emerald-700 focus:outline-none cursor-pointer transition-all duration-200'
-                            whileTap={{ scale: 0.5 }}
-                            variants={itemVariants}
-                            disabled={isLoaded}>
-                            {isLoaded ? <Loader className='w-5 h-5  inline-block mr-1 animate-spin' /> : 'Reset Password'}
-                        </motion.button>
+                        <AuthButton isLoading={isLoaded}>
+                            Reset Password
+                        </AuthButton>
                     </form>
                 </div>
 
             </motion.div>
 
 
-            <motion.div className='px-8 py-4 bg-gray-900/40 flex justify-center' variants={itemVariants}>
-                <Link to="/login" className="text-green-500 hover:underline">
-                    <ArrowLeft className='w-5 h-5 inline-block mr-1' />
-                    Back to Login
-                </Link>
-            </motion.div>
-        </motion.div>
+        </AuthContainer>
     );
 };
 

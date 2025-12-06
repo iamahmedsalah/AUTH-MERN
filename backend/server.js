@@ -23,7 +23,7 @@ db();
 const app = express();
 
 // Enable CORS
-app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+app.use(cors({ origin: ['http://localhost:5173', 'https://auth-mern-gilt.vercel.app'], credentials: true }));
 
 // Body parser middleware
 
@@ -42,13 +42,6 @@ const AuthRoutes = require("./routes/authRoutes");
 // Mount routes
 app.use('/api/auth', AuthRoutes);
 
-// Serve static files from the React app
-if(process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, "../frontend/dist")));
-    app.get("*", (req, res) => {
-        res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
-    });
-}
 // PORT & Start server on port
 const PORT = process.env.PORT || 5000;
 
